@@ -38,6 +38,7 @@ TESTS = [
     ("NS Formal Theorem (6 tests)", "src/symbolic/ns_formal_theorem.py"),
     ("Mechanism Boundary Tests (7 tests)", "src/symbolic/mechanism_boundary_tests.py"),
     ("Adversarial Blow-up Tests (6 tests)", "src/symbolic/adversarial_blow_up_tests.py"),
+    ("Gap Analysis & Solution (4 tests)", "src/symbolic/gap_analysis_and_solution.py"),
 ]
 
 
