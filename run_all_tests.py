@@ -25,6 +25,8 @@ TESTS = [
     ("Navier-Stokes Rigorous (7 tests)", "src/symbolic/navier_stokes_rigorous.py"),
     ("Navier-Stokes Advanced (8 tests)", "src/symbolic/navier_stokes_advanced.py"),
     ("Unified Proof (3 proofs)", "src/symbolic/unified_proof.py"),
+    ("Rigorous Gap Closure", "src/symbolic/rigorous_gap_closure.py"),
+    ("Formal Proof Analysis (100-digit)", "src/symbolic/formal_proof_analysis.py"),
 ]
 
 
