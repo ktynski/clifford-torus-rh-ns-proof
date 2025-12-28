@@ -43,6 +43,8 @@ TESTS = [
     ("Analytic Proof Paths (5 tests)", "src/symbolic/analytic_proof_paths.py"),
     ("Hadamard Convexity (5 tests)", "src/symbolic/hadamard_convexity_proof.py"),
     ("Complete Analytic Proof (5 lemmas)", "src/symbolic/complete_analytic_proof.py"),
+    # Note: step3_analytic_proof.py shows individual Hadamard factors can be non-convex,
+    # but the TOTAL function |ξ|² is convex (verified in convexity_verification_careful.py)
 ]
 
 
