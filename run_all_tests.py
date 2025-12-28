@@ -33,6 +33,9 @@ TESTS = [
     ("Clifford-NS Formulation (6 tests)", "src/symbolic/clifford_ns_formulation.py"),
     ("Clifford-NS Solutions (5 tests)", "src/symbolic/clifford_ns_solution.py"),
     ("Enstrophy Bound Proof (8 tests)", "src/symbolic/enstrophy_bound_proof.py"),
+    ("NS Exact Solutions (7 tests)", "src/symbolic/ns_exact_solution.py"),
+    ("NS Density Argument (6 tests)", "src/symbolic/ns_density_argument.py"),
+    ("NS Formal Theorem (6 tests)", "src/symbolic/ns_formal_theorem.py"),
 ]
 
 
