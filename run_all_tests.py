@@ -28,7 +28,8 @@ TESTS = [
     ("Rigorous Gap Closure", "src/symbolic/rigorous_gap_closure.py"),
     ("Formal Proof Analysis (100-digit)", "src/symbolic/formal_proof_analysis.py"),
     ("1D Convexity Rigorous", "src/symbolic/convexity_rigorous.py"),
-    ("NS-RH Equivalence", "src/symbolic/navier_stokes_equivalence.py"),
+    ("NS-RH Equivalence (2D)", "src/symbolic/navier_stokes_equivalence.py"),
+    ("NS 3D Clifford Flow (7 tests)", "src/symbolic/ns_3d_clifford_test.py"),
 ]
 
 
