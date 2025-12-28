@@ -40,6 +40,9 @@ TESTS = [
     ("Adversarial Blow-up Tests (6 tests)", "src/symbolic/adversarial_blow_up_tests.py"),
     ("Gap Analysis & Solution (4 tests)", "src/symbolic/gap_analysis_and_solution.py"),
     ("Convexity Verification (5 tests)", "src/symbolic/convexity_verification_careful.py"),
+    ("Analytic Proof Paths (5 tests)", "src/symbolic/analytic_proof_paths.py"),
+    ("Hadamard Convexity (5 tests)", "src/symbolic/hadamard_convexity_proof.py"),
+    ("Complete Analytic Proof (5 lemmas)", "src/symbolic/complete_analytic_proof.py"),
 ]
 
 
