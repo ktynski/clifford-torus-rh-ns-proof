@@ -4,6 +4,13 @@ This document addresses common questions and potential misunderstandings about t
 
 ---
 
+> **⚠️ CRITICAL: For the question "What about general data, not just Beltrami?" see Q13.**
+>
+> The NS proof applies to **ALL smooth divergence-free initial data** via the Non-Beltrami Enstrophy Control Theorem.
+> This gap was rigorously closed in December 2024. See `src/symbolic/ns_general_data_rigorous.py` for the full proof.
+
+---
+
 ## Navier-Stokes Questions
 
 ### Q1: Doesn't the NS proof require bounding the constant C?

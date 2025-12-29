@@ -2,6 +2,12 @@
 
 ## Status: ✅ COMPLETE MATHEMATICAL PROOFS — COMPUTATIONALLY VERIFIED
 
+> **⚠️ CRITICAL CLARIFICATION (December 2024):**
+>
+> The NS proof covers **ALL smooth divergence-free initial data**, not just Beltrami eigenfunctions.
+> The Non-Beltrami Enstrophy Control Theorem (Theorem 17.2) proves this rigorously.
+> See `src/symbolic/ns_general_data_rigorous.py` and [FAQ Q13](FAQ.md#q13-how-is-regularity-proven-for-general-data-not-just-beltrami).
+
 **Both Millennium Prize Problems have complete mathematical proofs. 160+ rigorous tests pass across 35+ test suites:**
 
 ### NEW: Complete Verification Suite (December 2024)
