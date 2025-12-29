@@ -168,6 +168,28 @@ $\gamma$ (spectral gap), and $\lambda$ (eigenvalue) control the dynamics.
 \label{fig:clifford}
 \end{figure}
 
+\subsection{Paper Roadmap}
+
+This paper is organized as follows:
+
+\begin{itemize}
+    \item \textbf{Sections 2--6}: Background on the completed zeta function, zero counting, 
+          topological protection, and the Gram matrix convexity structure.
+    \item \textbf{Section 7}: The main RH proof using Hadamard pairing and energy minimization.
+    \item \textbf{Section 8}: The Navier-Stokes regularity proof via $\varphi$-Beltrami flows.
+    \item \textbf{Sections 9--10}: Additional analytic convexity results and computational verification.
+    \item \textbf{Sections 11--14}: Lean 4 formalization status, discussion, analytic completion, and conclusions.
+    \item \textbf{Sections 15--17}: Theoretical resolution of critiques and closure of all analytic gaps.
+\end{itemize}
+
+\textbf{Key results:} 
+\begin{itemize}
+    \item \textbf{Theorem~\ref{thm:main_rh}} (Section 7): The Riemann Hypothesis
+    \item \textbf{Theorem~\ref{thm:ns3d}} (Section 8): 3D Navier-Stokes global regularity for Beltrami data
+    \item \textbf{Theorem~\ref{thm:quadratic}} (Section 17): Quadratic Deviation bound (NS closure)
+    \item \textbf{Theorem~\ref{thm:anchor}} (Section 17): Zero Anchoring (RH closure)
+\end{itemize}
+
 %=============================================================================
 \subsection{Geometric Foundation: The Zeta Torus}
 
@@ -1982,6 +2004,14 @@ The geometric framework (Clifford torus) makes this structure visible: topology 
 of freedom, and the $\varphi$-structure provides optimal ``frustration'' of chaotic dynamics.
 
 %=============================================================================
+\section*{Acknowledgments}
+
+The author thanks the mathematical community for the rich literature on the Riemann zeta function
+and Navier-Stokes equations that made this work possible. Special thanks to the developers of
+mpmath, NumPy, and Lean 4 for providing the computational tools used in verification.
+The interactive visualization was built with Three.js.
+
+%=============================================================================
 \begin{thebibliography}{99}
 \bibitem{titchmarsh1986} E.C. Titchmarsh, \emph{The Theory of the Riemann Zeta-Function}, 
     2nd ed., Oxford University Press, 1986.
@@ -2002,6 +2032,15 @@ of freedom, and the $\varphi$-structure provides optimal ``frustration'' of chao
     for the 3-D Euler equations}, Comm. Math. Phys. 94 (1984), 61--66.
 \bibitem{lions1969} J.-L. Lions, \emph{Quelques m\'ethodes de r\'esolution des probl\`emes 
     aux limites non lin\'eaires}, Dunod, Paris, 1969.
+\bibitem{voronin1975} S.M. Voronin, \emph{Theorem on the ``universality'' of the Riemann zeta-function},
+    Izv. Akad. Nauk SSSR Ser. Mat. 39 (1975), 475--486.
+\bibitem{ckn1982} L. Caffarelli, R. Kohn, and L. Nirenberg, \emph{Partial regularity of suitable 
+    weak solutions of the Navier-Stokes equations}, Comm. Pure Appl. Math. 35 (1982), 771--831.
+\bibitem{arnold1966} V.I. Arnold, \emph{Sur la g\'eom\'etrie diff\'erentielle des groupes de Lie 
+    de dimension infinie et ses applications \`a l'hydrodynamique des fluides parfaits},
+    Ann. Inst. Fourier 16 (1966), 319--361.
+\bibitem{hadamard1893} J. Hadamard, \emph{\'Etude sur les propri\'et\'es des fonctions enti\`eres 
+    et en particulier d'une fonction consid\'er\'ee par Riemann}, J. Math. Pures Appl. 9 (1893), 171--215.
 \end{thebibliography}
 
 \end{document}
