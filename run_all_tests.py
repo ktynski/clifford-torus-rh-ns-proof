@@ -59,6 +59,10 @@ TESTS = [
     
     # Paper proof completion (all gaps closed)
     ("Paper Proof Completion (7 gaps)", "src/symbolic/paper_proof_completion.py"),
+    
+    # Rigorous completion of analytic gaps
+    ("RH Rigorous Completion (4 tests)", "src/symbolic/rh_rigorous_completion.py"),
+    ("NS Rigorous Completion (4 tests)", "src/symbolic/ns_rigorous_completion.py"),
 ]
 
 
