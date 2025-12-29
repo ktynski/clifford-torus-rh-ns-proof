@@ -8,10 +8,14 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 \usepackage{graphicx}
-\usepackage{float}  % Better figure placement
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{microtype}
+\graphicspath{{figures/}}
 
 % Custom shaded box environment using fbox
 \newenvironment{keyinsight}[1]{%
+  \par\medskip\noindent
   \begin{center}%
   \fbox{\begin{minipage}{0.92\textwidth}%
   \vspace{0.3em}%
@@ -19,14 +23,12 @@
   \vspace{0.3em}%
   \hrule
   \vspace{0.5em}%
-}{% end definition
+}{%
   \vspace{0.3em}%
   \end{minipage}}%
   \end{center}%
+  \par\medskip
 }
-\usepackage{booktabs}  % Professional tables
-\usepackage{microtype}  % Better typography
-\graphicspath{{figures/}}
 
 \geometry{margin=1in}
 
