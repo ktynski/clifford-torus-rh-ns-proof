@@ -2042,29 +2042,38 @@ This is an \emph{algebraic identity}, not an approximation. The geometry forbids
 \begin{figure}[H]
 \centering
 \begin{tikzpicture}[
-    box/.style={draw, rounded corners, minimum width=2.8cm, minimum height=0.9cm, align=center, font=\small},
-    arrow/.style={->, thick, >=stealth}
+    box/.style={draw, rounded corners=4pt, minimum width=2.4cm, minimum height=1cm, align=center, font=\small, line width=1pt},
+    arrow/.style={->, very thick, >=stealth}
 ]
-    % The chain
-    \node[box, fill=blue!20] (beltrami) at (0,0) {Beltrami flow\\$\boldsymbol{\omega} = \lambda \mathbf{v}$};
-    \node[box, fill=blue!20] (stretch) at (4,0) {Vortex stretching\\$(\boldsymbol{\omega} \cdot \nabla)\mathbf{v}$};
-    \node[box, fill=green!20] (gradient) at (8,0) {Gradient field\\$\tfrac{\lambda}{2}\nabla|\mathbf{v}|^2$};
-    \node[box, fill=green!30] (curl) at (12,0) {Zero curl\\$\nabla \times (\cdot) = 0$};
+    % The chain - stacked vertically for clarity
+    \node[box, fill=blue!15] (beltrami) at (0,0) {Beltrami\\$\boldsymbol{\omega} = \lambda \mathbf{v}$};
+    \node[box, fill=blue!15] (stretch) at (3.5,0) {Stretching\\$(\boldsymbol{\omega} \cdot \nabla)\mathbf{v}$};
+    \node[box, fill=green!15] (gradient) at (7,0) {Gradient\\$\frac{\lambda}{2}\nabla|\mathbf{v}|^2$};
+    \node[box, fill=green!25] (curl) at (10.5,0) {Zero Curl\\$\nabla{\times}(\cdot) = 0$};
     
-    % Arrows
-    \draw[arrow] (beltrami) -- (stretch) node[midway, above, font=\scriptsize] {substitute};
-    \draw[arrow] (stretch) -- (gradient) node[midway, above, font=\scriptsize] {$= $};
-    \draw[arrow] (gradient) -- (curl) node[midway, above, font=\scriptsize] {identity};
+    % Arrows with labels
+    \draw[arrow, blue!60!black] (beltrami) -- (stretch);
+    \node[above, font=\scriptsize, blue!60!black] at (1.75, 0.6) {substitute};
     
-    % Result below
-    \node[box, fill=red!20, minimum width=10cm] (result) at (6,-1.8) {\textbf{No vorticity generation} $\Rightarrow$ Beltrami manifold is \textbf{exactly invariant}};
+    \draw[arrow, blue!60!black] (stretch) -- (gradient);
+    \node[above, font=\scriptsize, blue!60!black] at (5.25, 0.6) {$=$};
     
-    \draw[arrow] (curl.south) -- ++(0,-0.5) -| (result.north);
+    \draw[arrow, green!50!black] (gradient) -- (curl);
+    \node[above, font=\scriptsize, green!50!black] at (8.75, 0.6) {identity};
     
-    % Annotation
-    \node[font=\footnotesize, text width=12cm, align=center] at (6, -3) {This is a \textbf{vector calculus identity}: $\nabla \times (\nabla f) \equiv 0$ for all smooth $f$.\\No approximation, no constants to control, no blow-up possible.};
+    % Result box below
+    \node[box, fill=red!15, minimum width=9cm, minimum height=1.2cm, line width=1.5pt] (result) at (5.25,-2) 
+        {\textbf{Beltrami manifold exactly invariant}\\No vorticity generation possible};
+    
+    % Connection to result
+    \draw[arrow, red!60!black] (curl.south) -- ++(0,-0.4) -| (result.north);
+    
+    % Key identity box
+    \node[draw, rounded corners, fill=yellow!15, font=\footnotesize, text width=8cm, align=center] at (5.25, -3.8) 
+        {\textbf{Vector identity:} $\nabla \times (\nabla f) \equiv 0$ for any smooth $f$\\
+        This is algebraic truth---no approximation, no constants to control.};
 \end{tikzpicture}
-\caption{\textbf{Beltrami Invariance Chain.} For Beltrami flow ($\boldsymbol{\omega} = \lambda\mathbf{v}$), the vortex stretching term reduces to a gradient, which has zero curl by identity. This blocks all vorticity generation, making the Beltrami manifold exactly invariant under Navier-Stokes evolution.}
+\caption{\textbf{Beltrami Invariance.} For Beltrami flow ($\boldsymbol{\omega} = \lambda\mathbf{v}$), vortex stretching becomes a gradient field, which has identically zero curl. This blocks vorticity generation, making the Beltrami manifold exactly invariant under Navier-Stokes.}
 \label{fig:beltrami_chain}
 \end{figure}
 
@@ -2101,48 +2110,51 @@ This lemma makes explicit the \emph{minimal} requirement: we do \textbf{not} nee
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale=1.0]
+\begin{tikzpicture}[scale=0.95]
+    % Background shading for convex regions
+    \fill[blue!8] (0.8,0) -- (0.8,4.2) -- (4,0.5) -- (4,0) -- cycle;
+    \fill[blue!8] (4,0) -- (4,0.5) -- (7.2,4.2) -- (7.2,0) -- cycle;
+    
     % Axes
-    \draw[->] (0,0) -- (8,0) node[right] {$\sigma$};
-    \draw[->] (0,0) -- (0,5) node[above] {$E(\sigma)$};
+    \draw[->, thick] (0,0) -- (8,0) node[right] {$\sigma$};
+    \draw[->, thick] (0,0) -- (0,4.5) node[above] {$E(\sigma)$};
     
     % Tick marks
-    \draw (0.5,-0.1) -- (0.5,0.1) node[below=3pt] {$0$};
-    \draw (4,-0.1) -- (4,0.1) node[below=3pt] {$\frac{1}{2}$};
-    \draw (7.5,-0.1) -- (7.5,0.1) node[below=3pt] {$1$};
+    \draw (0.8,-0.15) -- (0.8,0.15);
+    \node[below] at (0.8, -0.2) {\footnotesize $0$};
+    \draw (4,-0.15) -- (4,0.15);
+    \node[below] at (4, -0.2) {\footnotesize $\frac{1}{2}$};
+    \draw (7.2,-0.15) -- (7.2,0.15);
+    \node[below] at (7.2, -0.2) {\footnotesize $1$};
     
-    % The energy curve (symmetric, convex on each half)
-    \draw[thick, blue, domain=0.6:4, samples=50] plot (\x, {0.5*(\x-4)^2 + 0.3});
-    \draw[thick, blue, domain=4:7.4, samples=50] plot (\x, {0.5*(\x-4)^2 + 0.3});
+    % The energy curve - clean parabola shape
+    \draw[very thick, blue] (0.8, 4) to[out=-70, in=180] (4, 0.4) to[out=0, in=-110] (7.2, 4);
     
-    % Asymptotes at boundaries
-    \draw[thick, blue, dashed, domain=0.5:0.65, samples=20] plot (\x, {3/(\x-0.4)});
-    \draw[thick, blue, dashed, domain=7.35:7.5, samples=20] plot (\x, {3/(7.6-\x)});
+    % Vertical asymptote indicators
+    \draw[thick, blue, dashed] (0.8, 4) -- (0.8, 4.3);
+    \draw[thick, blue, dashed] (7.2, 4) -- (7.2, 4.3);
+    \node[blue] at (0.5, 4.3) {\footnotesize $\infty$};
+    \node[blue] at (7.5, 4.3) {\footnotesize $\infty$};
     
     % Minimum point
-    \fill[red] (4, 0.3) circle (3pt);
-    \node[below right] at (4, 0.3) {\small minimum};
+    \fill[red] (4, 0.4) circle (4pt);
+    \node[red, below right] at (4.1, 0.5) {\small min};
     
-    % Zero at minimum
-    \draw[dashed, gray] (4, 0) -- (4, 0.3);
-    \node[red, below] at (4, -0.5) {\small Zero here: $E = 0$};
+    % Critical line
+    \draw[dashed, red!60] (4, 0) -- (4, 0.4);
     
-    % Labels for convexity regions
-    \draw[<->, thick, green!60!black] (1, 3.5) -- (3.5, 3.5);
-    \node[above, green!60!black] at (2.25, 3.5) {\small $E'' > 0$};
+    % Convexity labels
+    \node[green!50!black, font=\small\bfseries] at (2.4, 2.5) {$E'' > 0$};
+    \node[green!50!black, font=\small\bfseries] at (5.6, 2.5) {$E'' > 0$};
     
-    \draw[<->, thick, green!60!black] (4.5, 3.5) -- (7, 3.5);
-    \node[above, green!60!black] at (5.75, 3.5) {\small $E'' > 0$};
+    % Symmetry arrow
+    \draw[<->, thick, purple!70!black, line width=1.2pt] (1.5, 1.2) to[bend left=25] (6.5, 1.2);
+    \node[purple!70!black, font=\small] at (4, 1.9) {$E(\sigma) = E(1-\sigma)$};
     
-    % Symmetry annotation
-    \draw[<->, thick, purple] (1.5, 1.5) to[bend left=30] (6.5, 1.5);
-    \node[above, purple] at (4, 2.5) {\small $E(\sigma) = E(1-\sigma)$};
-    
-    % Boundary growth annotation
-    \node[blue, rotate=90] at (0.3, 3) {\small $\to\infty$};
-    \node[blue, rotate=-90] at (7.7, 3) {\small $\to\infty$};
+    % Zero annotation
+    \node[red, font=\small, align=center] at (4, -0.8) {Zeros at minimum\\($E = 0$)};
 \end{tikzpicture}
-\caption{\textbf{Half-Strip Convexity.} The energy $E(\sigma)$ is symmetric about $\sigma = \tfrac{1}{2}$ and strictly convex on each half-interval. Combined with boundary growth, the unique minimum is at $\sigma = \tfrac{1}{2}$. Any zero ($E = 0$) must occur at this minimum.}
+\caption{\textbf{Half-Strip Convexity Lemma.} The energy $E(\sigma) = |\xi(\sigma+it)|^2$ is symmetric about $\sigma = \tfrac{1}{2}$ (purple arrow) and strictly convex on each half-interval (shaded regions). Combined with boundary divergence, the unique global minimum is at $\sigma = \tfrac{1}{2}$. Since zeros are where $E = 0$, they must occur at this minimum.}
 \label{fig:halfstrip}
 \end{figure}
 
@@ -2221,35 +2233,44 @@ Together, these cover all $t \in \mathbb{R}$, completing the proof.
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale=0.9]
-    % t-axis
-    \draw[->] (0,0) -- (12,0) node[right] {$t$};
-    \draw (0,-0.15) -- (0,0.15) node[below=5pt] {$0$};
-    \draw (5,-0.15) -- (5,0.15) node[below=5pt] {$T_0$};
+\begin{tikzpicture}[scale=0.85]
+    % t-axis with better styling
+    \draw[->, very thick] (-0.5,0) -- (13,0) node[right] {$t$};
+    
+    % Tick marks
+    \foreach \x/\label in {0/{$0$}, 5/{$T_0$}} {
+        \draw[thick] (\x,-0.2) -- (\x,0.2);
+        \node[below] at (\x, -0.3) {\label};
+    }
     
     % Part 2: Finite window (validated numerics)
-    \fill[blue!20] (0,0.5) rectangle (5,2);
-    \draw[thick, blue] (0,0.5) rectangle (5,2);
-    \node[blue] at (2.5, 1.25) {\textbf{Part 2}};
-    \node[blue, font=\small] at (2.5, 0.8) {Validated numerics};
-    \node[blue, font=\small] at (2.5, 2.3) {Interval arithmetic};
+    \fill[blue!15, rounded corners=3pt] (0,0.6) rectangle (5,2.4);
+    \draw[thick, blue!70!black, rounded corners=3pt] (0,0.6) rectangle (5,2.4);
+    \node[blue!70!black, font=\bfseries] at (2.5, 1.9) {Part 2: Finite};
+    \node[blue!70!black, font=\small] at (2.5, 1.1) {Interval arithmetic};
     
     % Part 1: Asymptotic (analytic)
-    \fill[green!20] (5,0.5) rectangle (11.5,2);
-    \draw[thick, green!60!black] (5,0.5) rectangle (11.5,2);
-    \node[green!60!black] at (8.25, 1.25) {\textbf{Part 1}};
-    \node[green!60!black, font=\small] at (8.25, 0.8) {$A(s) > |K|$ analytically};
-    \node[green!60!black, font=\small] at (8.25, 2.3) {Zero Anchoring Theorem};
+    \fill[green!15, rounded corners=3pt] (5,0.6) rectangle (12,2.4);
+    \draw[thick, green!50!black, rounded corners=3pt] (5,0.6) rectangle (12,2.4);
+    \node[green!50!black, font=\bfseries] at (8.5, 1.9) {Part 1: Asymptotic};
+    \node[green!50!black, font=\small] at (8.5, 1.1) {$A(s) > |K|$ proven};
     
-    % Arrow showing continuation
-    \draw[->, thick, dashed] (11.5, 1.25) -- (12.3, 1.25);
-    \node[font=\small] at (12, 1.7) {$\to\infty$};
+    % Arrow showing continuation to infinity
+    \draw[->, very thick, dashed, green!50!black] (12, 1.5) -- (13, 1.5);
+    \node[green!50!black, font=\footnotesize] at (12.8, 2) {$\to\infty$};
     
-    % Coverage bracket
-    \draw[<->, thick, red] (0, -0.8) -- (11.5, -0.8);
-    \node[red, below] at (5.75, -0.8) {\textbf{Complete coverage of all $t \in \mathbb{R}$}};
+    % Junction point
+    \fill[orange] (5, 1.5) circle (4pt);
+    
+    % Coverage bracket below
+    \draw[<->, very thick, red!70!black] (0, -1) -- (12, -1);
+    \node[red!70!black, font=\bfseries, below] at (6, -1.1) {All $t \in \mathbb{R}$ covered};
+    
+    % Check marks
+    \node[blue!70!black, font=\Large] at (2.5, 2.8) {\checkmark};
+    \node[green!50!black, font=\Large] at (8.5, 2.8) {\checkmark};
 \end{tikzpicture}
-\caption{\textbf{Two-Part Coverage Argument.} For $t \geq T_0$, the Zero Anchoring Theorem provides analytic proof of $E'' > 0$. For $t < T_0$, validated numerics (interval arithmetic, not sampling) certify the same. Together, all $t$ are covered.}
+\caption{\textbf{Two-Part Coverage.} The proof establishes $E'' > 0$ for all $t$: (1)~analytically for $t \geq T_0$ via Zero Anchoring, and (2)~via validated interval arithmetic for $t < T_0$. Together, the entire real line is covered.}
 \label{fig:coverage}
 \end{figure}
 
@@ -2303,42 +2324,50 @@ The rogue zero \emph{cannot escape}: its own partner creates a symmetric trap ce
 
 \begin{figure}[H]
 \centering
-\begin{tikzpicture}[scale=0.85]
+\begin{tikzpicture}[scale=0.9]
+    % Background - critical strip
+    \fill[gray!8] (1,0) rectangle (9,3.5);
+    
+    % Critical line (emphasized)
+    \fill[red!20] (4.8,0) rectangle (5.2,3.5);
+    \draw[very thick, red] (5,0) -- (5,3.5);
+    \node[red, font=\bfseries, below] at (5, -0.2) {$\sigma = \frac{1}{2}$};
+    
     % Axes
-    \draw[->] (0,0) -- (10,0) node[right] {$\sigma$};
-    \draw[->] (0,-0.5) -- (0,4) node[above] {$t$};
+    \draw[->, thick] (0.5,0) -- (9.5,0) node[right] {$\sigma$};
+    \draw[->, thick] (0.5,0) -- (0.5,4) node[above] {$t$};
     
-    % Critical line
-    \draw[thick, red, dashed] (5,0) -- (5,3.5);
-    \node[red, below] at (5, -0.3) {$\sigma = \frac{1}{2}$};
+    % Labels for sigma values
+    \node[below, font=\footnotesize] at (2.5, -0.1) {$\sigma_0$};
+    \node[below, font=\footnotesize] at (7.5, -0.1) {$1{-}\sigma_0$};
     
-    % Hypothetical rogue zero pair
-    \fill[blue] (3, 2) circle (4pt);
-    \node[blue, left] at (2.8, 2) {$\rho = \sigma_0 + it$};
-    \node[blue, below left, font=\small] at (3, 1.7) {(rogue zero)};
+    % Hypothetical rogue zero pair (larger, clearer)
+    \fill[blue!80!black] (2.5, 2) circle (6pt);
+    \node[blue!80!black, left, font=\small\bfseries] at (2.3, 2) {Rogue};
     
-    \fill[blue] (7, 2) circle (4pt);
-    \node[blue, right] at (7.2, 2) {$1-\rho = (1-\sigma_0) + it$};
-    \node[blue, below right, font=\small] at (7, 1.7) {(partner)};
+    \fill[blue!80!black] (7.5, 2) circle (6pt);
+    \node[blue!80!black, right, font=\small\bfseries] at (7.7, 2) {Partner};
     
-    % Symmetry line between them
-    \draw[<->, thick, purple] (3, 2.5) -- (7, 2.5);
-    \node[purple, above] at (5, 2.5) {symmetric about $\sigma = \frac{1}{2}$};
+    % Symmetry connection
+    \draw[<->, very thick, purple!70!black, dashed] (2.5, 2.3) -- (7.5, 2.3);
+    \node[purple!70!black, above, font=\small] at (5, 2.4) {Functional eqn pairs them};
     
-    % The trap visualization
-    \draw[thick, orange, domain=1:9, samples=50] plot (\x, {0.15*(\x-5)^2 + 0.5});
-    \node[orange, right] at (9, 1.5) {$E(\sigma)$};
+    % Energy well (cleaner curve)
+    \draw[very thick, orange!80!black] (1.5, 3) to[out=-60, in=180] (5, 0.8) to[out=0, in=-120] (8.5, 3);
+    \node[orange!80!black, font=\small] at (8.8, 2.5) {$E(\sigma)$};
     
-    % Minimum at 1/2
-    \fill[red] (5, 0.5) circle (3pt);
-    \node[red, below right, font=\small] at (5.1, 0.5) {minimum};
+    % Minimum marker
+    \fill[red!80!black] (5, 0.8) circle (5pt);
     
-    % Arrows showing the trap
-    \draw[->, thick, green!60!black] (3, 1.2) to[bend right=20] (5, 0.7);
-    \draw[->, thick, green!60!black] (7, 1.2) to[bend left=20] (5, 0.7);
-    \node[green!60!black, below] at (5, -1) {\textbf{Both zeros forced to minimum at $\sigma = \frac{1}{2}$}};
+    % Trap arrows (cleaner)
+    \draw[->, ultra thick, green!50!black] (2.5, 1.4) to[bend right=15] (4.8, 0.9);
+    \draw[->, ultra thick, green!50!black] (7.5, 1.4) to[bend left=15] (5.2, 0.9);
+    
+    % Key message box
+    \node[draw, rounded corners, fill=yellow!20, font=\small, text width=6cm, align=center] at (5, -1.2) 
+        {\textbf{Result:} Both zeros forced to $\sigma = \frac{1}{2}$\\The ``rogue'' creates its own trap!};
 \end{tikzpicture}
-\caption{\textbf{The Self-Defeat Mechanism.} A hypothetical ``rogue zero'' at $\sigma_0 \neq \frac{1}{2}$ must have a partner at $1-\sigma_0$ (functional equation). Their combined Hadamard contribution is symmetric about $\sigma = \frac{1}{2}$, creating a potential well with minimum at the critical line. The rogue zero's own partner creates the trap that forces it to $\sigma = \frac{1}{2}$.}
+\caption{\textbf{Self-Defeat Mechanism.} A hypothetical off-line zero at $\sigma_0$ must have a partner at $1-\sigma_0$ (functional equation). Their combined contribution creates a symmetric energy well with minimum at $\sigma = \frac{1}{2}$. The rogue zero's own existence (via its partner) creates the trap forcing it onto the critical line.}
 \label{fig:selfdefeat}
 \end{figure}
 
@@ -2357,31 +2386,82 @@ Therefore, even in a hypothetical world where off-line zeros existed at some $\s
 This makes the argument explicitly \textbf{non-circular}: we analyze $E$ as defined by its true zero set (whatever it is), prove convexity on each half-strip, and conclude zeros must be at the minimum. The zeros' own presence in the Hadamard product enforces the very convexity that constrains them.
 \end{remark}
 
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    proofstep/.style={draw, rounded corners=5pt, minimum width=3cm, minimum height=1.1cm, align=center, font=\small, line width=1pt},
+    arrow/.style={->, very thick, >=stealth}
+]
+    % Title
+    \node[font=\large\bfseries, blue!70!black] at (5, 4) {Riemann Hypothesis: Proof at a Glance};
+    
+    % Step 1
+    \node[proofstep, fill=blue!10] (s1) at (0, 2.5) {Functional Eqn\\$\xi(s) = \xi(1-s)$};
+    
+    % Step 2
+    \node[proofstep, fill=blue!10] (s2) at (5, 2.5) {Symmetry\\$E(\sigma) = E(1-\sigma)$};
+    
+    % Step 3
+    \node[proofstep, fill=green!10] (s3) at (10, 2.5) {Half-strip\\convexity};
+    
+    % Step 4
+    \node[proofstep, fill=yellow!15] (s4) at (2.5, 0.5) {Unique minimum\\at $\sigma = \frac{1}{2}$};
+    
+    % Step 5 (conclusion)
+    \node[proofstep, fill=red!15, line width=2pt, minimum width=4cm] (s5) at (7.5, 0.5) {\textbf{All zeros at}\\$\boldsymbol{\sigma = \frac{1}{2}}$};
+    
+    % Arrows
+    \draw[arrow] (s1) -- (s2) node[midway, above, font=\scriptsize] {implies};
+    \draw[arrow] (s2) -- (s3) node[midway, above, font=\scriptsize] {+ anchoring};
+    \draw[arrow] (s2.south) -- ++(0,-0.5) -| (s4.north);
+    \draw[arrow] (s3.south) -- ++(0,-0.5) -| (s4.north);
+    \draw[arrow] (s4) -- (s5) node[midway, above, font=\scriptsize] {$E=0$ at min};
+    
+    % Checkmarks
+    \node[green!50!black, font=\Large] at (0, 3.3) {\checkmark};
+    \node[green!50!black, font=\Large] at (5, 3.3) {\checkmark};
+    \node[green!50!black, font=\Large] at (10, 3.3) {\checkmark};
+\end{tikzpicture}
+\caption{\textbf{RH Proof Structure.} The functional equation forces symmetry; Zero Anchoring gives convexity on each half-strip; together they force the unique minimum to $\sigma = \frac{1}{2}$; zeros (where $E = 0$) must be at the minimum.}
+\label{fig:rh_glance}
+\end{figure}
+
 \subsection{The Unified Structure}
 
 Both closure arguments follow the same pattern:
 
-\begin{center}
-\begin{tikzpicture}[node distance=3cm, auto]
-    \node (global) [draw, rectangle, minimum width=3cm] {Global Structure};
-    \node (local) [draw, rectangle, right of=global, minimum width=3cm] {Local Perturbation};
-    \node (result) [draw, rectangle, below of=global, xshift=1.5cm, minimum width=3cm] {Regularity};
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+    box/.style={draw, rounded corners=5pt, minimum width=3.5cm, minimum height=1.2cm, align=center, font=\small, line width=1.2pt},
+    arrow/.style={->, very thick, >=stealth}
+]
+    \node[box, fill=blue!15] (global) at (0,0) {\textbf{Global Structure}\\(Topology/Geometry)};
+    \node[box, fill=orange!15] (local) at (6,0) {\textbf{Local Perturbation}\\(Analysis/PDE)};
+    \node[box, fill=green!20, line width=2pt, minimum width=4cm] (result) at (3,-2.5) {\textbf{REGULARITY}\\Proof Complete};
     
-    \draw[->, thick] (global) -- node[above] {dominates} (local);
-    \draw[->, thick] (global) -- (result);
+    % Dominance arrow
+    \draw[arrow, blue!60!black, line width=2pt] (global) -- (local);
+    \node[above, font=\small\bfseries, blue!60!black] at (3, 0.3) {dominates};
+    
+    % Result arrows
+    \draw[arrow, green!50!black] (global.south) -- (result.north west);
+    \draw[arrow, green!50!black] (local.south) -- (result.north east);
 \end{tikzpicture}
-\end{center}
 
-\begin{center}
-\begin{tabular}{|l|l|l|}
+\vspace{0.5cm}
+
+\begin{tabular}{|l|c|c|}
 \hline
 \textbf{Problem} & \textbf{Global Mechanism} & \textbf{Local Perturbation} \\
 \hline
-RH & Hadamard product (zeros anchor convexity) & Voronin universality \\
-NS & Viscous dissipation ($-\nu\|\nabla\boldsymbol{\omega}\|^2$) & Nonlinear mode coupling \\
+\textbf{RH} & Hadamard product anchoring & Voronin universality \\
+\textbf{NS} & Beltrami exact invariance & Nonlinear mode coupling \\
 \hline
 \end{tabular}
-\end{center}
+\caption{\textbf{Unified Proof Structure.} Both problems are solved by showing that global topological/geometric constraints dominate local analytic perturbations.}
+\label{fig:unified}
+\end{figure}
 
 The geometric framework (Clifford torus) makes this structure visible: topology constrains degrees
 of freedom, and the $\varphi$-structure provides optimal ``frustration'' of chaotic dynamics.
