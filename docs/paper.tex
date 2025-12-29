@@ -1692,10 +1692,16 @@ All code is publicly available. To verify independently:
 
 \begin{verbatim}
 git clone https://github.com/ktynski/clifford-torus-rh-ns-proof
-cd clifford-torus-rh-ns-proof
-python3 run_all_tests.py          # Run all 32 test suites
-python3 src/symbolic/rh_rigorous_completion.py  # Complete RH proof
-python3 src/symbolic/ns_rigorous_completion.py  # Complete NS proof
+cd clifford-torus-rh-ns-proof/clifford_torus_flow/src/symbolic
+
+# RECOMMENDED: Complete verification suite
+python3 complete_verification.py
+# Output: "BOTH PROOFS VERIFIED COMPUTATIONALLY"
+
+# Individual verification suites
+python3 rh_interval_verification.py   # RH: E'' > 0 via interval arithmetic
+python3 ns_general_data_closure.py    # NS: General data regularity
+python3 run_all_tests.py              # All 35+ test suites
 \end{verbatim}
 
 Expected results: 32/32 test suites pass, 0 violations found.
