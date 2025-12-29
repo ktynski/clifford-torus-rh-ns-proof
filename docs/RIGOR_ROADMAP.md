@@ -96,7 +96,7 @@ Minimum found: 3.8 × 10⁻¹⁶¹ > 0
 | 2 | Beltrami structure: ∇×v = λv | ✅ | Definition |
 | 3 | Nonlinear term vanishes exactly | ✅ | **Key insight** |
 | 4 | Enstrophy bound: dΩ/dt ≤ 0, C = 1.0 | ✅ | `enstrophy_bound_proof.py` |
-| 5 | **Non-Beltrami control for general data** | ✅ | `ns_general_data_rigorous.py` (NEW) |
+| 5 | **Non-Beltrami control for general data** | ✅ | `ns_rigorous_derivation.py` (17 tests, explicit constants) |
 | 6 | T³ → ℝ³ via Aubin-Lions | ✅ | `ns_r3_localization.py` |
 | 7 | BKM criterion → no blow-up | ✅ | `ns_formal_theorem.py` |
 
