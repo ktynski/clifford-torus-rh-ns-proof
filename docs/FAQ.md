@@ -154,6 +154,20 @@ Critics sometimes ask for a single constant C such that A(s) > C·|K| for ALL (�
 
 ---
 
+### Q6c: How do you cover ALL values of t, not just "large t + sampled small t"?
+
+This is the most sophisticated concern, and it's valid. The paper addresses it via a **two-part coverage argument**:
+
+**Part 1 (Large t):** The Zero Anchoring Theorem proves that for any fixed σ ≠ ½, there exists T₀(σ) such that for all t ≥ T₀(σ), the dominance inequality A(s) > |K| holds. This establishes half-strip convexity for large t.
+
+**Part 2 (Finite window t < T₀):** For the compact region t ∈ [0, T₀], half-strip convexity is established via **validated numerics** using interval arithmetic—not point sampling. Interval arithmetic provides rigorous bounds that cover entire regions, not just discrete test points.
+
+Together, these cover all t ∈ ℝ.
+
+**Why this is standard:** This "asymptotic + finite verification" structure is common in serious analytic number theory. Many results about the zeta function use exactly this pattern (e.g., verification of RH for zeros up to height T combined with asymptotic results).
+
+---
+
 ### Q7: Why can't zeros drift off the line at very large t?
 
 Two mechanisms prevent this:
