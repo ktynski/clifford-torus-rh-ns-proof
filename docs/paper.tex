@@ -8,21 +8,22 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 \usepackage{graphicx}
+\usepackage{float}  % Better figure placement
+
 % Custom shaded box environment using fbox
 \newenvironment{keyinsight}[1]{%
-  \begin{center}
-  \fbox{\begin{minipage}{0.92\textwidth}
-  \vspace{0.3em}
-  \textbf{#1}
-  \vspace{0.3em}
+  \begin{center}%
+  \fbox{\begin{minipage}{0.92\textwidth}%
+  \vspace{0.3em}%
+  \noindent\textbf{#1}%
+  \vspace{0.3em}%
   \hrule
-  \vspace{0.5em}
-}{%
-  \vspace{0.3em}
-  \end{minipage}}
-  \end{center}
+  \vspace{0.5em}%
+}{% end definition
+  \vspace{0.3em}%
+  \end{minipage}}%
+  \end{center}%
 }
-\usepackage{float}  % Better figure placement
 \usepackage{booktabs}  % Professional tables
 \usepackage{microtype}  % Better typography
 \graphicspath{{figures/}}
