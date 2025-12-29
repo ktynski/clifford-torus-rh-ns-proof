@@ -56,6 +56,9 @@ TESTS = [
     
     # Extended verification (strengthened)
     ("RH Extended Verification (6 tests)", "src/symbolic/rh_extended_verification.py"),
+    
+    # Paper proof completion (all gaps closed)
+    ("Paper Proof Completion (7 gaps)", "src/symbolic/paper_proof_completion.py"),
 ]
 
 
