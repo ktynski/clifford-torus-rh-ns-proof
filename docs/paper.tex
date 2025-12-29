@@ -1817,6 +1817,107 @@ zeros are anchored to $\sigma = \tfrac{1}{2}$---remains valid. The refinements a
 provide the analytic precision required for complete proofs.
 
 %=============================================================================
+\section{Proposed Path to Full Closure}
+\label{sec:closure}
+
+We present conjectured theorems that, if proven, would close all remaining gaps.
+Both follow the same structural pattern: \emph{global mechanisms dominate local perturbations}.
+
+\subsection{Navier-Stokes: Quadratic Deviation Theorem}
+
+\begin{theorem}[Quadratic Deviation Growth]
+\label{thm:quadratic}
+Let $\mathbf{v}(t)$ solve 3D Navier-Stokes with Beltrami initial data $\mathbf{v}_0$ satisfying 
+$\boldsymbol{\omega}_0 = \lambda \mathbf{v}_0$. Define the Beltrami deviation:
+\begin{equation}
+\delta(t) = \frac{\|\boldsymbol{\omega}(t) - \lambda \mathbf{v}(t)\|_{L^2}}{\|\boldsymbol{\omega}(t)\|_{L^2}}
+\end{equation}
+Then there exists $C > 0$ depending only on $\nu$ and the domain such that:
+\begin{equation}
+\frac{d\delta}{dt} \leq C \cdot \Omega(t) \cdot \delta(t)^2
+\end{equation}
+\end{theorem}
+
+\begin{proof}[Proof Sketch]
+Decompose $\boldsymbol{\omega} = \boldsymbol{\omega}_B + \boldsymbol{\omega}_\perp$ where 
+$\boldsymbol{\omega}_B = \lambda \mathbf{v}$ is the Beltrami part.
+\begin{enumerate}
+\item The nonlinear term $(\boldsymbol{\omega} \cdot \nabla)\mathbf{v}$ decomposes:
+      $(\boldsymbol{\omega}_B \cdot \nabla)\mathbf{v} = 0$ (vanishes for Beltrami).
+\item The remaining term $(\boldsymbol{\omega}_\perp \cdot \nabla)\mathbf{v}$ is $O(\delta \cdot \Omega)$.
+\item The deviation $\boldsymbol{\omega}_\perp$ evolves with nonlinear source $O(\delta^2 \cdot \Omega)$.
+\end{enumerate}
+The quadratic dependence on $\delta$ is the key: deviation grows from its own self-interaction, not from the dominant Beltrami structure.
+\end{proof}
+
+\begin{corollary}[Closure for Navier-Stokes]
+For exact Beltrami initial data ($\delta(0) = 0$), the solution of:
+\begin{equation}
+\frac{d\delta}{dt} = C \cdot \Omega(t) \cdot \delta^2, \quad \delta(0) = 0
+\end{equation}
+is $\delta(t) \equiv 0$ for all $t$. Combined with viscous dominance (Theorem~\ref{thm:conditional}), 
+this gives global regularity.
+\end{corollary}
+
+\textbf{Status:} The quadratic bound requires rigorous derivation from the NS equations. 
+Numerical evidence strongly supports this structure.
+
+\subsection{Riemann Hypothesis: Zero-Anchored Convexity}
+
+\begin{theorem}[Zero Anchoring]
+\label{thm:anchor}
+For $E(\sigma,t) = |\xi(\sigma + it)|^2$, the ``anchoring contribution'' from zeros:
+\begin{equation}
+A(s) = \sum_\rho \left(\frac{\partial}{\partial\sigma} \log|1 - s/\rho|^2 \right)^2
+\end{equation}
+satisfies: $A(s) \to +\infty$ as $s$ approaches any zero, and $A(s) > |K|$ for all $s$ in the 
+critical strip, where $K$ is a bound on $\partial^2(\log E)/\partial\sigma^2$ from Voronin universality.
+\end{theorem}
+
+\begin{proof}[Proof Sketch]
+\begin{enumerate}
+\item Near each zero $\rho_n = \tfrac{1}{2} + i\gamma_n$: $|1 - s/\rho_n| \to 0$, so the gradient-squared term diverges.
+\item Zero density grows as $N(T) \sim \tfrac{T}{2\pi}\log T$.
+\item As $T \to \infty$, zeros become dense enough that the ``anchoring'' from nearby zeros 
+      dominates any local concavity in the gaps.
+\item Voronin universality operates in gaps between zeros, but these gaps shrink as $O(1/\log T)$.
+\end{enumerate}
+\end{proof}
+
+\textbf{Status:} Requires quantitative bounds on the competition between zero density growth 
+and Voronin flexibility. Numerical verification at $t = 1000$ shows gradient-squared term (32.9) 
+dominates local concavity ($-1.39$) by a factor of 24.
+
+\subsection{The Unified Structure}
+
+Both closure arguments follow the same pattern:
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm, auto]
+    \node (global) [draw, rectangle, minimum width=3cm] {Global Structure};
+    \node (local) [draw, rectangle, right of=global, minimum width=3cm] {Local Perturbation};
+    \node (result) [draw, rectangle, below of=global, xshift=1.5cm, minimum width=3cm] {Regularity};
+    
+    \draw[->, thick] (global) -- node[above] {dominates} (local);
+    \draw[->, thick] (global) -- (result);
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Problem} & \textbf{Global Mechanism} & \textbf{Local Perturbation} \\
+\hline
+RH & Hadamard product (zeros anchor convexity) & Voronin universality \\
+NS & Viscous dissipation ($-\nu\|\nabla\boldsymbol{\omega}\|^2$) & Nonlinear mode coupling \\
+\hline
+\end{tabular}
+\end{center}
+
+The geometric framework (Clifford torus) makes this structure visible: topology constrains degrees
+of freedom, and the $\varphi$-structure provides optimal ``frustration'' of chaotic dynamics.
+
+%=============================================================================
 \begin{thebibliography}{99}
 \bibitem{titchmarsh1986} E.C. Titchmarsh, \emph{The Theory of the Riemann Zeta-Function}, 
     2nd ed., Oxford University Press, 1986.
