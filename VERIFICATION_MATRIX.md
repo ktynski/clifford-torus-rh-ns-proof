@@ -26,24 +26,35 @@ This document provides a trace from the mathematical claims in the paper to the 
 
 ## 2. 3D Navier-Stokes Regularity (NS)
 
-### The 6-Step Proof Chain
+### The Conditional Proof Structure
 
 | Step | Claim | Evidence / File | Status |
 | :--- | :--- | :--- | :--- |
 | **1** | φ-Beltrami Density | `src/symbolic/ns_rigorous_completion.py` | ✓ Weyl Theorem |
 | **2** | Beltrami: ∇×v = λv | `src/symbolic/enstrophy_bound_proof.py` | ✓ Definition |
-| **3** | Nonlinear term vanishes exactly | `src/symbolic/ns_rigorous_completion.py` | ✓ Analytical |
-| **4** | Enstrophy bound C = 1.0 | `src/symbolic/enstrophy_bound_proof.py` | ✓ Proven |
-| **5** | T³ → ℝ³ Localization | `src/symbolic/ns_r3_localization.py` | ✓ Aubin-Lions |
+| **3** | Vortex stretching bound | `src/symbolic/diophantine_resonance.py` | ✓ Conditional |
+| **4** | Viscous dominance theorem | Paper Section 11.1 | ✓ Proven |
+| **5** | T³ → ℝ³ via weighted decay | Paper Section 11.2 | ✓ Revised |
 | **6** | BKM criterion → no blow-up | `src/symbolic/ns_formal_theorem.py` | ✓ Complete |
 
-### Key Insight
+### Key Insight (Revised)
 
-For Beltrami flow with ω = λv, the vortex-stretching term vanishes **exactly**:
+**Critical observation:** Beltrami structure is NOT preserved under NS evolution. However, the proof uses **viscous dominance**:
+
 ```
-⟨ω, (v·∇)v⟩ = (λ/2) ∫ ∇·(|v|²v) dV = 0
+dΩ/dt = -ν∫|∇ω|²dV + ∫ω·(ω·∇)v dV
+        ─────────────   ───────────────
+        viscous term    stretching term
+        (always ≤ 0)    (bounded by δ·Ω^{3/2})
 ```
-This gives dΩ/dt = -ν||∇ω||² ≤ 0, hence Ω(t) ≤ Ω(0) with C = 1.0.
+
+**Conditional Theorem 11.2:** If Beltrami deviation δ(t) ≤ δ* = νλ₁/(C√Ω₀), then Ω(t) ≤ Ω(0).
+
+### Open Conjecture (Conjecture 11.1)
+
+For φ-quasiperiodic Beltrami initial data, δ(t) remains bounded. This requires proving the φ-structure constrains deviation growth.
+
+**Numerical evidence:** Even with explicit nonlinear evolution, enstrophy ratio Ω(t)/Ω(0) = 0.45 (decreased), supporting the conjecture.
 
 ## 3. Global Integrity Checks
 
@@ -59,9 +70,16 @@ This gives dΩ/dt = -ν||∇ω||² ≤ 0, hence Ω(t) ≤ Ω(0) with C = 1.0.
 ---
 ## Status Summary
 
-| Problem | Mathematical Proof | Numerical Verification | Lean 4 |
+| Problem | Proof Status | Open Conjecture | Numerical Support |
 | :--- | :--- | :--- | :--- |
-| **RH** | ✅ Complete | ✅ 40,608 pts | ⏳ Awaits Mathlib |
-| **NS** | ✅ Complete | ✅ 1000+ configs | ⏳ In progress |
+| **RH** | 🔬 Conditional | Hadamard Dominance (Thm 11.7) | ✅ 40,608 pts |
+| **NS** | 🔬 Conditional | φ-Structure Control (Conj 11.1) | ✅ Ω/Ω₀ = 0.45 |
 
-**Statement of Mathematical Completeness**: All analytic gaps identified in the October 2024 draft have been closed as of December 2024. The proofs for both RH and NS are mathematically complete. The Lean 4 `sorry` statements mark Mathlib prerequisites (zeta function definition), not mathematical gaps.
+**Honest Assessment (December 2024):**
+- The geometric framework is mathematically rigorous
+- The conditional theorems are proven
+- **Remaining gaps** are specific analytic conjectures with strong numerical support:
+  - **RH:** Hadamard product dominance over Voronin universality
+  - **NS:** φ-structure control of Beltrami deviation growth
+
+The proofs are **complete modulo these conjectures**. See Paper Section 11 for detailed analysis of these gaps and proposed resolutions.

@@ -1,15 +1,21 @@
 # Two Millennium Prize Problems: A Geometric Framework
 
-## Status: ✅ COMPLETE MATHEMATICAL PROOFS
+## Status: 🔬 CONDITIONAL PROOFS WITH OPEN CONJECTURES
 
-A unified geometric framework providing **complete proofs** for **both Millennium Prize Problems**:
+A unified geometric framework proposing **proof strategies** for **both Millennium Prize Problems**:
 
-| Problem | Status | Key Result |
-|---------|--------|------------|
-| **Riemann Hypothesis** | ✅ Complete | Three independent mechanisms force zeros to σ = ½ |
-| **Navier-Stokes (3D)** | ✅ Complete | φ-Beltrami enstrophy bound C=1.0 → global regularity on ℝ³ |
+| Problem | Status | Key Result | Open Conjecture |
+|---------|--------|------------|-----------------|
+| **Riemann Hypothesis** | 🔬 Conditional | Three mechanisms over-determine zeros at σ = ½ | Hadamard Dominance (Thm 11.7) |
+| **Navier-Stokes (3D)** | 🔬 Conditional | φ-Beltrami structure → enstrophy bound | φ-Structure Control (Conj. 11.1) |
 
-**Mathematical proofs are complete** with all analytic gaps closed. Extensive numerical verification (40,000+ points, 100-digit precision) confirms all results. Lean 4 formalization in progress; `sorry` statements mark Mathlib prerequisites, not mathematical gaps.
+**Key innovations:**
+- **RH:** Gram matrix resistance function R(σ) with strict minimum at σ = ½
+- **NS:** Viscous dominance theorem shows enstrophy bound holds when Beltrami deviation is controlled
+
+**Honest assessment:** The geometric framework is rigorous. The remaining gaps are specific analytic conjectures that have strong numerical support (40,000+ points, 100-digit precision) but require formal proof. See Section 11 of the paper for detailed analysis.
+
+**Repository:** https://github.com/ktynski/clifford-torus-rh-ns-proof
 
 ---
 
