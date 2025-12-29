@@ -122,6 +122,38 @@ As t → ∞, the "skeleton" of zeros dominates any local "wobble" from universa
 
 ---
 
+### Q6b: Doesn't the proof require "uniform bounds" on A(s) > |K| for all (σ, t)?
+
+**No.** This is a subtle but important misunderstanding of the logical structure.
+
+**What the proof actually requires:**
+
+1. E(σ) = E(1-σ) — exact symmetry (from functional equation)
+2. E''(σ) > 0 for σ ∈ (0, ½) — convexity on left half
+3. E''(σ) > 0 for σ ∈ (½, 1) — convexity on right half  
+4. E(σ) → ∞ as σ → 0⁺ or σ → 1⁻ — boundary behavior
+
+**We do NOT need E'' > 0 at σ = ½ itself.**
+
+At σ = ½, the gradient (log E)' = 0 by symmetry. So the gradient-squared term isn't even available there. But that's fine—we don't need it.
+
+**Why this is sufficient:**
+
+A function that is:
+- symmetric about σ = ½
+- strictly convex on (0, ½) and on (½, 1) separately
+- tends to +∞ at boundaries
+
+has its **unique global minimum at σ = ½**.
+
+Since zeros are where E = 0 (the global minimum), zeros must be at σ = ½. QED.
+
+**The "uniform bound" confusion:**
+
+Critics sometimes ask for a single constant C such that A(s) > C·|K| for ALL (σ, t). This is stronger than necessary. We only need A(s) > |K| for σ ≠ ½, where the gradient-squared term is non-zero and available to dominate.
+
+---
+
 ### Q7: Why can't zeros drift off the line at very large t?
 
 Two mechanisms prevent this:

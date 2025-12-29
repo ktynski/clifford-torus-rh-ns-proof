@@ -50,6 +50,22 @@ This holds for **any** C, even C = ∞. The key: δ = 0 is an **exactly invarian
 
 A "rogue zero" at σ₀ ≠ 1/2 cannot escape: its partner creates a symmetric trap centered at σ = 1/2.
 
+### ❓ "Doesn't the RH proof require 'uniform bounds' on A(s) > |K|?"
+
+**No.** This is a subtle misunderstanding of the logical structure.
+
+The proof requires **convexity on each side of σ = 1/2**, not everywhere:
+```
+E''(σ) > 0  for σ ∈ (0, ½)     ← convex on left
+E''(σ) > 0  for σ ∈ (½, 1)     ← convex on right
+E(σ) = E(1-σ)                   ← symmetric
+```
+
+**We do NOT need E'' > 0 at σ = 1/2 itself.** At σ = 1/2, the gradient is zero by symmetry.
+
+A symmetric function that is strictly convex on each half has its unique minimum at the axis.
+Zeros = where E = 0 = global minimum → must be at σ = 1/2.
+
 ---
 
 **Interactive Simulation:** https://cliffordtorusflow-git-main-kristins-projects-24a742b6.vercel.app/

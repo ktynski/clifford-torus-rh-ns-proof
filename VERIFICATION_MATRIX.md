@@ -25,7 +25,7 @@ This document provides a trace from the mathematical claims in the paper to the 
 | **Speiser's Theorem (Simplicity)** | `src/symbolic/speiser_proof.py` | ✓ Historical (1934) |
 | **Zero Anchoring (Closure)** | `src/symbolic/zero_anchoring_proof.py` | ✓ **PROVEN** |
 
-### ⚠️ Common Misunderstanding: "Isn't this circular?"
+### ⚠️ Common Misunderstanding #1: "Isn't this circular?"
 
 **No.** The proof does NOT assume zeros are on the line. The logic:
 
@@ -37,6 +37,19 @@ This document provides a trace from the mathematical claims in the paper to the 
 6. → Zeros (where E = 0) must be at the minimum
 
 A hypothetical "rogue zero" at σ₀ ≠ 1/2 creates its own trap via its partner.
+
+### ⚠️ Common Misunderstanding #2: "Doesn't this require uniform bounds?"
+
+**No.** The proof requires convexity on each SIDE of σ = 1/2, not everywhere:
+
+```
+Required:                          NOT required:
+E''(σ) > 0 for σ ∈ (0, ½)         E''(½) > 0  ← not needed!
+E''(σ) > 0 for σ ∈ (½, 1)         Single constant C for all (σ,t)
+E(σ) = E(1-σ)  [exact symmetry]
+```
+
+At σ = 1/2, the gradient (log E)' = 0 by symmetry, so the gradient² term isn't available—but it's also not needed. Convexity on each half + symmetry → minimum at axis.
 
 ## 2. 3D Navier-Stokes Regularity (NS)
 

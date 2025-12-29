@@ -1,6 +1,6 @@
 /-
 Copyright (c) 2024 Riemann Hypothesis Formalization Project. All rights reserved.
-Released under Apache 2.0 license as described in the file LICENSE.
+Released under All Rights Reserved - Viewing and Study Only License as described in the file LICENSE.
 Authors: RH Formalization Team
 -/
 import Mathlib.Analysis.Complex.Basic

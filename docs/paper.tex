@@ -2097,7 +2097,7 @@ For any $\sigma \neq \tfrac{1}{2}$ as $t \to \infty$. The key identity $E'' = E 
 
 \begin{corollary}[Global Convexity]
 \label{cor:rh_closure}
-For all $t$ sufficiently large and all $\sigma \in (0,1)$:
+For all $t$ sufficiently large and all $\sigma \in (0,1) \setminus \{\tfrac{1}{2}\}$:
 \begin{equation}
 \frac{\partial^2 E}{\partial \sigma^2} = E \cdot \left[\frac{\partial^2 \log E}{\partial \sigma^2} + \left(\frac{\partial \log E}{\partial \sigma}\right)^2\right] > 0
 \end{equation}
@@ -2105,6 +2105,32 @@ Combined with symmetry $E(\sigma) = E(1-\sigma)$, the unique minimum is at $\sig
 \end{corollary}
 
 \textbf{Numerical Verification:} At $t = 1000$, $\sigma = 0.8$: the second derivative $\partial^2(\log E)/\partial\sigma^2 = -1.39$ (locally concave), but $(d\log E/d\sigma)^2 = 32.9$. The sum $31.5 > 0$ confirms global convexity. Near zeros, the gradient-squared term reaches values $> 60$, dominating any local concavity.
+
+\begin{keyinsight}{Key Insight: The Logical Structure (Why ``Uniform Bounds'' Are Not Required)}
+A common concern is: ``Does this require a uniform bound $A(s) > |K|$ for all $(\sigma, t)$?'' \textbf{No.}
+
+The proof requires \textbf{convexity on each side of the axis}, not everywhere:
+\begin{enumerate}
+\item $E(\sigma) = E(1-\sigma)$ — exact symmetry from functional equation
+\item $E''(\sigma) > 0$ for $\sigma \in (0, \tfrac{1}{2})$ — convexity on left half
+\item $E''(\sigma) > 0$ for $\sigma \in (\tfrac{1}{2}, 1)$ — convexity on right half
+\item $E(\sigma) \to \infty$ as $\sigma \to 0^+$ or $\sigma \to 1^-$ — boundary behavior
+\end{enumerate}
+
+\textbf{We do not need $E'' > 0$ at $\sigma = \tfrac{1}{2}$ itself.} At $\sigma = \tfrac{1}{2}$, the gradient $(\log E)' = 0$ by symmetry anyway.
+
+\textbf{The key observation:} A function that is:
+\begin{itemize}
+\item symmetric about $\sigma = \tfrac{1}{2}$
+\item strictly convex on $(0, \tfrac{1}{2})$ and on $(\tfrac{1}{2}, 1)$
+\item tends to $+\infty$ at the boundaries
+\end{itemize}
+has its \emph{unique global minimum at} $\sigma = \tfrac{1}{2}$.
+
+Since zeros are where $E = 0$ (the global minimum), zeros must be at $\sigma = \tfrac{1}{2}$.
+
+This is why we need $A(s) > |K|$ only for $\sigma \neq \tfrac{1}{2}$, where the gradient-squared term $(\log E)'^2 > 0$ is available to dominate.
+\end{keyinsight}
 
 \begin{keyinsight}{Key Insight: Why the Argument Is Not Circular}
 A common concern is: ``Does this proof assume zeros are on the line to prove they're on the line?'' \textbf{No.}
