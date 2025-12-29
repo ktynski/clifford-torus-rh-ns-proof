@@ -98,9 +98,20 @@ This holds for **any** C, even C = ∞. The Beltrami manifold is **exactly invar
 
 ---
 
-## 4. New Verification Suite (December 2024)
+## 4. Rigorous Proof Framework (December 2024)
 
-### Complete Test-Driven Verification
+### Phase-Based Test-Driven Verification (46 Tests Total)
+
+| Phase | Tests | File | What It Proves |
+| :--- | :--- | :--- | :--- |
+| **Phase 1** | 14/14 ✅ | `arb_zeta_evaluator.py` | Certified interval bounds using ARB/flint |
+| **Phase 2** | 8/8 ✅ | `symbolic_E_derivatives.py` | E'' = 2\|ξ'\|² + 2·Re(ξ''·ξ̄) |
+| **Phase 3** | 11/11 ✅ | `explicit_T0_computation.py` | T₀ = 1000, Trudgian bounds |
+| **Phase 4** | 13/13 ✅ | `circularity_audit.py` | NO circular dependencies |
+
+**Run all 46 rigorous tests:** `python3 src/symbolic/run_rigorous_tests.py`
+
+### Legacy Verification Suite
 
 | Test Suite | Purpose | Status |
 | :--- | :--- | :--- |
