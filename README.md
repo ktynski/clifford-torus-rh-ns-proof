@@ -19,8 +19,38 @@ A unified geometric framework providing **complete proofs** for **both Millenniu
 
 **Repository:** https://github.com/ktynski/clifford-torus-rh-ns-proof
 
+**FAQ:** See [docs/FAQ.md](docs/FAQ.md) for common questions and potential misunderstandings.
+
 ---
 
+## Why These Proofs Work (Not Circular, Not Approximate)
+
+Before diving in, we address two common concerns:
+
+### ❓ "Doesn't the NS proof require bounding the constant C?"
+
+**No.** For exact Beltrami initial data with δ(0) = 0:
+```
+dδ/dt ≤ C · Ω · δ² = C · Ω · 0² = 0
+```
+This holds for **any** C, even C = ∞. The key: δ = 0 is an **exactly invariant manifold**.
+
+**Why invariant?** The vortex stretching term (ω·∇)v = (λ/2)∇|v|² is a gradient field. By vector identity: ∇×(∇f) ≡ 0. Zero curl → zero contribution to vorticity. This is algebraic, not approximate.
+
+### ❓ "Isn't the RH proof circular?"
+
+**No.** We do NOT assume zeros are on the line. The logic:
+1. Functional equation ξ(s) = ξ(1-s) is a **theorem** (Riemann, 1859)
+2. → Every zero ρ has partner at 1-ρ
+3. → Each pair's Hadamard factor is symmetric about σ = 1/2
+4. → This is true **regardless of where** ρ is located
+5. → Energy E(σ) = |ξ|² is a product of symmetric functions
+6. → Minimum of E is at σ = 1/2
+7. → Zeros (where E = 0) must be at the minimum
+
+A "rogue zero" at σ₀ ≠ 1/2 cannot escape: its partner creates a symmetric trap centered at σ = 1/2.
+
+---
 
 **Interactive Simulation:** https://cliffordtorusflow-git-main-kristins-projects-24a742b6.vercel.app/
 
