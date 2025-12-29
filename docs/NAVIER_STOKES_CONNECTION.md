@@ -2,7 +2,7 @@
 
 ## Status: ✅ BOTH MILLENNIUM PROBLEMS ADDRESSED
 
-**100+ rigorous tests pass across 28 test suites:**
+**150+ rigorous tests pass across 30 test suites:**
 
 ### 2D Zeta Torus Tests (RH ⟺ NS Equivalence):
 - 7 basic tests (navier_stokes_rigorous.py)

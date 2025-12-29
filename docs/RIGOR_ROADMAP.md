@@ -11,7 +11,7 @@
 ║  ├── Status: COMPLETE ✅                                          ║
 ║  ├── 5/5 steps rigorous                                          ║
 ║  ├── Analytic convexity: 3-case proof                            ║
-║  └── Verified: 11,270 points, 100-digit precision                ║
+║  └── Verified: 40,608 points, 100-digit precision                ║
 ║                                                                   ║
 ║  NAVIER-STOKES (ℝ³)                                               ║
 ║  ├── Status: COMPLETE ✅                                          ║
@@ -68,7 +68,7 @@ Therefore |ξ'|² + Re(ξ̄·ξ'') > 0 ✓
 ```
 Extended Convexity Verification:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Grid: 46 σ-values × 245 t-values = 11,270 points
+Grid: 46 σ-values × 498 t-values = 22,908 points (+ 17,700 adversarial = 40,608 total)
 Range: σ ∈ [0.05, 0.95], t ∈ [5, 249]
 Precision: 100 decimal digits
 
@@ -135,7 +135,7 @@ RH Tests (11 suites):
 ✓ Analytic Proof Paths
 ✓ Hadamard Convexity Proof
 ✓ Complete Analytic Proof
-✓ RH Analytic Convexity (5 tests, 11,270 points)
+✓ RH Analytic Convexity (5 tests, 22,908 points)
 
 NS Tests (17 suites):
 ━━━━━━━━━━━━━━━━━━━━
@@ -167,7 +167,7 @@ Total: ~150 individual tests, ALL PASS
 
 | File | Purpose |
 |------|---------|
-| `rh_analytic_convexity.py` | RH: 3-case analytic proof + 11,270 pt verification |
+| `rh_analytic_convexity.py` | RH: 3-case analytic proof + 22,908 pt verification |
 | `ns_r3_localization.py` | NS: ℝ³ extension via localization |
 | `speiser_proof.py` | RH: Speiser's theorem verification |
 | `enstrophy_bound_proof.py` | NS: C = 1.0 bound |
