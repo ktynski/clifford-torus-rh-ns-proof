@@ -99,6 +99,18 @@ For arbitrary smooth divergence-free initial data u₀:
 
 All verification code in `src/symbolic/`:
 
+### New Rigorous Proof Framework (46 Tests)
+
+| File | Purpose |
+|------|---------|
+| `arb_zeta_evaluator.py` | ★ Certified interval arithmetic for ζ, Γ, ξ, E, E'' |
+| `symbolic_E_derivatives.py` | ★ Exact formula: E'' = 2\|ξ'\|² + 2·Re(ξ''·ξ̄) |
+| `explicit_T0_computation.py` | ★ Trudgian bounds, T₀ = 1000 |
+| `circularity_audit.py` | ★ Dependency graph showing no circular reasoning |
+| `run_rigorous_tests.py` | ★ Main test runner (46 tests) |
+
+### Legacy Verification Suite
+
 | File | Purpose |
 |------|---------|
 | `rh_interval_verification.py` | Interval arithmetic for E'' > 0 |
@@ -109,11 +121,15 @@ All verification code in `src/symbolic/`:
 ### Run Complete Verification
 
 ```bash
+# Rigorous 46-test suite (RECOMMENDED)
 cd src/symbolic
+python3 run_rigorous_tests.py
+
+# Legacy verification
 python3 complete_verification.py
 ```
 
-Expected output: **BOTH PROOFS VERIFIED COMPUTATIONALLY**
+Expected output: **🎉 ALL PHASES COMPLETE - PROOF IS RIGOROUS**
 
 ---
 

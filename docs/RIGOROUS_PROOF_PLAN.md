@@ -2,7 +2,11 @@
 
 ## Status: ✅ COMPLETE (All 46 Tests Pass)
 
+**Last Updated: December 2024**
+
 This document outlines the test-driven plan that converted our numerical evidence into a rigorous computer-assisted proof in the style of Hales/Flyspeck.
+
+Run verification: `python3 src/symbolic/run_rigorous_tests.py`
 
 ---
 

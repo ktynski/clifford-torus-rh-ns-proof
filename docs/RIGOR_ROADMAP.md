@@ -103,19 +103,16 @@ Minimum found: 3.8 × 10⁻¹⁶¹ > 0
 
 For Beltrami flow with ω = λv, the vortex-stretching term vanishes **exactly**:
 ```
-⟨ω, (v·∇)v⟩ = (λ/2) ∫ ∇·(|v|²v) dV = 0
-```
-(by divergence theorem since ∇·v = 0)
-
-The viscous term gives:
-```
-⟨ω, ν∆ω⟩ = -ν||∇ω||² ≤ 0
+(ω · ∇)v = (λv · ∇)v = (λ/2)∇|v|² = gradient field
 ```
 
-Therefore:
+Taking the curl: `∇ × (∇f) ≡ 0` — gradient fields have zero curl.
+
+Therefore vortex stretching contributes **nothing** to vorticity evolution. The viscous term:
 ```
 dΩ/dt = -ν||∇ω||² ≤ 0
 ```
+
 So **Ω(t) ≤ Ω(0)** with bound constant **C = 1.0** (not just bounded, but non-increasing!)
 
 ### Why φ-Structure Matters
