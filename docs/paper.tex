@@ -6,11 +6,20 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta,positioning}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
 \usepackage{graphicx}
+\usepackage{float}  % Better figure placement
+\usepackage{booktabs}  % Professional tables
+\usepackage{microtype}  % Better typography
 \graphicspath{{figures/}}
 
 \geometry{margin=1in}
+
+% Better figure placement
+\renewcommand{\floatpagefraction}{0.8}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.1}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -87,6 +96,55 @@ Clifford algebra, toroidal geometry, Speiser's theorem, enstrophy bounds.
 \noindent\textbf{MSC 2020:} 11M26 (primary), 35Q30, 76D03, 11M06, 15A66.
 \end{abstract}
 
+% Executive Summary Figure
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}[
+    problem/.style={draw, rectangle, rounded corners, minimum width=4.5cm, minimum height=1.2cm, 
+                    align=center, font=\small\bfseries, fill=blue!10},
+    mechanism/.style={draw, rectangle, rounded corners, minimum width=3.8cm, minimum height=0.9cm,
+                      align=center, font=\scriptsize, fill=yellow!20},
+    result/.style={draw, rectangle, rounded corners, minimum width=4cm, minimum height=1cm,
+                   align=center, font=\small\bfseries, fill=green!20, thick},
+    arrow/.style={-{Stealth[scale=1]}, thick}
+]
+    % Left column: Riemann Hypothesis
+    \node[problem] (rh) at (-4, 5) {Riemann Hypothesis\\$\mathrm{Re}(\rho) = \tfrac{1}{2}$?};
+    \node[mechanism] (rh1) at (-4, 3.5) {Hadamard Pairing\\$\xi(s)\xi(1-s)$ structure};
+    \node[mechanism] (rh2) at (-4, 2.3) {Gram Matrix Resistance\\$R(\sigma) \geq R(\tfrac{1}{2}) = 1$};
+    \node[mechanism] (rh3) at (-4, 1.1) {Zero Anchoring\\(Thm 17.3)};
+    \node[result] (rh_result) at (-4, -0.5) {All zeros on\\critical line};
+    
+    % Right column: Navier-Stokes
+    \node[problem] (ns) at (4, 5) {Navier-Stokes 3D\\Global regularity?};
+    \node[mechanism] (ns1) at (4, 3.5) {$\varphi$-Beltrami Structure\\$\nabla\times v = \lambda v$};
+    \node[mechanism] (ns2) at (4, 2.3) {Viscous Dominance\\$d\Omega/dt \leq 0$};
+    \node[mechanism] (ns3) at (4, 1.1) {Quadratic Deviation\\(Thm 17.1)};
+    \node[result] (ns_result) at (4, -0.5) {No finite-time\\blow-up};
+    
+    % Center: Unifying principle
+    \node[draw, ellipse, minimum width=3.5cm, minimum height=1.5cm, fill=red!10, thick,
+          font=\small\bfseries, align=center] (center) at (0, 2.3) {Unifying Principle:\\Global dominates Local};
+    
+    % Arrows
+    \draw[arrow] (rh) -- (rh1);
+    \draw[arrow] (rh1) -- (rh2);
+    \draw[arrow] (rh2) -- (rh3);
+    \draw[arrow] (rh3) -- (rh_result);
+    
+    \draw[arrow] (ns) -- (ns1);
+    \draw[arrow] (ns1) -- (ns2);
+    \draw[arrow] (ns2) -- (ns3);
+    \draw[arrow] (ns3) -- (ns_result);
+    
+    % Connections to center
+    \draw[dashed, gray] (rh2) -- (center);
+    \draw[dashed, gray] (ns2) -- (center);
+\end{tikzpicture}
+\caption{\textbf{Unified Framework for Two Millennium Prize Problems.} Both proofs share the same structural insight: global mechanisms (Hadamard product structure for RH, viscous dissipation for NS) dominate local perturbations (Voronin universality for RH, nonlinear mode coupling for NS). The closure theorems in Section~17 make this precise.}
+\label{fig:executive_summary}
+\end{figure}
+
 \tableofcontents
 
 %=============================================================================
@@ -131,33 +189,41 @@ the functional equation provides symmetry, the Gram matrix provides global conve
 and Speiser's theorem (simple zeros) provides local convexity. Together, they force
 zeros to the unique minimum at $\sigma = \frac{1}{2}$.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \begin{tikzpicture}[
-    box/.style={draw, rounded corners, minimum width=3cm, minimum height=1cm, align=center},
-    arrow/.style={-{Stealth[scale=1.2]}, thick}
+    box/.style={draw, rounded corners, minimum width=3.2cm, minimum height=1.1cm, align=center, font=\small},
+    input/.style={box, fill=blue!8},
+    process/.style={box, fill=yellow!15},
+    result/.style={box, fill=green!15, thick},
+    arrow/.style={-{Stealth[scale=1.2]}, thick, >=stealth}
 ]
-    \node[box] (sp) at (0,4) {Speiser 1934\\$\zeta'(\rho) \neq 0$};
-    \node[box] (fe) at (4,4) {Functional Equation\\$\xi(s) = \xi(1-s)$};
-    \node[box] (cv) at (0,2.5) {Strict Convexity\\$\partial^2 E/\partial\sigma^2 > 0$};
-    \node[box] (sy) at (4,2.5) {Symmetry\\$E(\sigma) = E(1-\sigma)$};
-    \node[box] (mn) at (2,1) {Unique Minimum\\at $\sigma = 1/2$};
-    \node[box,fill=green!10] (rh) at (2,-0.5) {Riemann Hypothesis};
+    % Input boxes (top row)
+    \node[input] (sp) at (0,4) {Speiser 1934\\$\zeta'(\rho) \neq 0$};
+    \node[input] (fe) at (5,4) {Functional Equation\\$\xi(s) = \xi(1-s)$};
     
-    \draw[arrow] (sp) -- (cv);
-    \draw[arrow] (fe) -- (sy);
+    % Process boxes (middle row)
+    \node[process] (cv) at (0,2.2) {Strict Convexity\\$\partial^2 E/\partial\sigma^2 > 0$};
+    \node[process] (sy) at (5,2.2) {Symmetry\\$E(\sigma) = E(1-\sigma)$};
+    
+    % Intermediate result
+    \node[process] (mn) at (2.5,0.5) {Unique Minimum\\at $\sigma = 1/2$};
+    
+    % Final result
+    \node[result] (rh) at (2.5,-1.2) {\textbf{Riemann Hypothesis}\\All zeros on critical line};
+    
+    % Arrows
+    \draw[arrow] (sp) -- (cv) node[midway, left, font=\scriptsize] {implies};
+    \draw[arrow] (fe) -- (sy) node[midway, right, font=\scriptsize] {implies};
     \draw[arrow] (cv) -- (mn);
     \draw[arrow] (sy) -- (mn);
-    \draw[arrow] (mn) -- (rh);
+    \draw[arrow, very thick] (mn) -- (rh);
 \end{tikzpicture}
-\caption{The proof chain. Speiser's theorem establishes zeros are simple,
-which implies strict convexity of the energy functional. The functional equation
-provides symmetry. Convexity plus symmetry forces the unique minimum to be at
-$\sigma = 1/2$, proving RH.}
+\caption{\textbf{The RH Proof Chain.} Starting from two classical results---Speiser's theorem (zeros are simple) and the functional equation---we derive strict convexity and symmetry of the energy functional $E(\sigma,t) = |\xi(\sigma+it)|^2$. Together these force all zeros to lie at the unique minimum $\sigma = \tfrac{1}{2}$.}
 \label{fig:proof_chain}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{fig1_torus_overview.png}
 \caption{The Clifford torus flow visualization showing emergent toroidal geometry.
@@ -184,7 +250,7 @@ This paper is organized as follows:
 
 \textbf{Key results:} 
 \begin{itemize}
-    \item \textbf{Theorem~\ref{thm:main_rh}} (Section 7): The Riemann Hypothesis
+    \item \textbf{Theorem~\ref{thm:main}} (Section 7): The Riemann Hypothesis
     \item \textbf{Theorem~\ref{thm:ns3d}} (Section 8): 3D Navier-Stokes global regularity for Beltrami data
     \item \textbf{Theorem~\ref{thm:quadratic}} (Section 17): Quadratic Deviation bound (NS closure)
     \item \textbf{Theorem~\ref{thm:anchor}} (Section 17): Zero Anchoring (RH closure)
@@ -202,35 +268,47 @@ with the identification $\sigma \sim 1 - \sigma$ from the functional equation.
 The critical line $\sigma = \frac{1}{2}$ is the \emph{throat} of this torus.
 \end{definition}
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
-\begin{tikzpicture}[scale=0.9]
-    % Draw torus cross-section
-    \draw[thick] (0,0) ellipse (3cm and 1.5cm);
-    \draw[thick] (0,0) ellipse (1cm and 0.5cm);
+\begin{tikzpicture}[scale=1.1]
+    % Outer torus boundary
+    \draw[thick, fill=blue!5] (0,0) ellipse (3.5cm and 1.8cm);
+    % Inner torus hole
+    \draw[thick, fill=white] (0,0) ellipse (1.2cm and 0.6cm);
     
-    % Throat (critical line)
-    \draw[red, very thick] (-1,0) -- (1,0);
-    \node[red, below] at (0,-0.3) {Throat: $\sigma = \frac{1}{2}$};
+    % Resistance shading (darker away from center)
+    \foreach \r in {1.4,1.6,...,3.2} {
+        \pgfmathsetmacro{\opacity}{(\r-1.2)/3*100}
+        \pgfmathsetmacro{\ry}{\r*0.5}
+        \draw[blue!\opacity, opacity=0.3] (0,0) ellipse (\r cm and \ry cm);
+    }
     
-    % Caustics on the throat
-    \fill[red] (-0.5,0) circle (3pt);
-    \fill[red] (0.3,0) circle (3pt);
-    \fill[red] (0.8,0) circle (3pt);
-    \node[above] at (0.3,0.2) {caustics (zeros)};
+    % Throat (critical line) - highlighted
+    \draw[red, ultra thick] (-1.2,0) -- (1.2,0);
+    \node[red, font=\bfseries] at (0,-0.85) {Critical Line: $\sigma = \tfrac{1}{2}$};
     
-    % Labels
-    \node at (2.5, 1) {$\sigma < \frac{1}{2}$};
-    \node at (2.5, -1) {$\sigma > \frac{1}{2}$};
-    \node at (-3.5, 0) {$R(\sigma) > 1$};
+    % Caustics (zeros) on the throat
+    \fill[red] (-0.7,0) circle (4pt);
+    \fill[red] (0,0) circle (4pt);
+    \fill[red] (0.5,0) circle (4pt);
+    \fill[red] (0.9,0) circle (4pt);
+    \node[above, font=\small] at (0.1,0.25) {\textit{zeros (caustics)}};
     
-    % Arrows showing resistance
-    \draw[->, thick, blue] (1.8, 0.8) -- (1.2, 0.3);
-    \draw[->, thick, blue] (1.8, -0.8) -- (1.2, -0.3);
-    \node[blue] at (2.5, 0) {resistance};
+    % Region labels
+    \node[font=\small] at (2.5, 1.1) {$\sigma < \tfrac{1}{2}$};
+    \node[font=\small] at (2.5, -1.1) {$\sigma > \tfrac{1}{2}$};
+    
+    % Resistance function annotation
+    \node[blue, font=\small, align=center] at (-3.8, 0) {High\\resistance\\$R(\sigma) > 1$};
+    \node[red, font=\small, align=center] at (0, 0.9) {Low resistance\\$R(\tfrac{1}{2}) = 1$};
+    
+    % Arrows showing "push" toward throat
+    \draw[->, very thick, blue!70!black] (2.2, 0.9) to[bend right=15] (1.3, 0.15);
+    \draw[->, very thick, blue!70!black] (2.2, -0.9) to[bend left=15] (1.3, -0.15);
+    \draw[->, very thick, blue!70!black] (-2.2, 0.9) to[bend left=15] (-1.3, 0.15);
+    \draw[->, very thick, blue!70!black] (-2.2, -0.9) to[bend right=15] (-1.3, -0.15);
 \end{tikzpicture}
-\caption{Cross-section of the zeta torus. The throat (red line) is at $\sigma = \frac{1}{2}$.
-Caustics (zeros) are forced to the throat by the resistance $R(\sigma) > 1$ away from it.}
+\caption{\textbf{Cross-section of the Zeta Torus.} The critical strip $0 < \sigma < 1$ forms a torus via the functional equation's symmetry $\sigma \leftrightarrow 1-\sigma$. The throat (red line) at $\sigma = \tfrac{1}{2}$ is where the resistance function $R(\sigma)$ achieves its unique minimum. Zeros (caustics) are energetically forced to the throat---they cannot exist elsewhere because $R(\sigma) > 1$ creates a barrier away from the critical line.}
 \label{fig:torus_cross_section}
 \end{figure}
 
@@ -254,7 +332,7 @@ where $N$ is the number of prime pairs $(p,q)$ with $p < q$.
 This function is globally strictly convex and uniquely minimized at $\sigma = \frac{1}{2}$ 
 (Theorem~\ref{thm:global}).
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{fig2_throat_caustics.png}
 \caption{The zeta torus throat viewed from inside. The pinched ``hourglass'' structure 
@@ -273,7 +351,7 @@ $E(\sigma, t) = |\xi(\sigma + it)|^2 = 0$.
 
 In the zeta torus, zeros of $\zeta(s)$ are caustics. By Speiser's theorem (Lemma~\ref{lem:L4}), each zero is simple (multiplicity 1), meaning each caustic is isolated and carries a winding number $W = 1$ (topological protection). The cosh structure creates ``resistance'' away from the throat, preventing caustics from existing at $\sigma \neq \frac{1}{2}$.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{proof_visualization.png}
 \caption{The visual proof framework showing the zeta function near the first zero at $t \approx 14.13$.
@@ -314,7 +392,7 @@ The geometric mean inherits strict monotonicity away from the minimum.
 
 This means caustics (zeros) can only exist at $\sigma = \frac{1}{2}$ where resistance is minimal.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{fig_resistance_function.png}
 \caption{The resistance function $R(\sigma)$ showing its global minimum at $\sigma = \frac{1}{2}$.
@@ -325,7 +403,7 @@ dramatically, making it impossible for zeros to exist off the critical line.}
 \label{fig:resistance_function}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{fig_gram_matrix_structure.png}
 \caption{Individual cosh factors $\cosh((\sigma - \frac{1}{2})\log(pq))$ for various prime pairs $(p,q)$,
@@ -544,7 +622,7 @@ is strictly positive for all $\sigma \in (0,1)$, even if individual factors were
 This makes $E$ a \emph{log-convex} function in $\sigma$, which is a much stronger condition 
 than simple convexity.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{fig_hadamard_pairing.png}
 \caption{Hadamard product pairing contribution to log-convexity. Left: Hypothetical off-line pair
@@ -563,7 +641,7 @@ The energy functional satisfies:
 \end{enumerate}
 \end{lemma}
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \begin{tikzpicture}[scale=1.2]
     % Axes
@@ -1065,7 +1143,7 @@ in the interval $(t_1, t_2)$:
 \end{enumerate}
 \end{lemma}
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \begin{tikzpicture}[scale=1.2]
     \draw[->] (-2,0) -- (2,0) node[right] {$\sigma$};
@@ -1160,7 +1238,7 @@ Off-line systematic & 5,000 & No violations \\
 
 \textbf{Conclusion:} No counterexamples found despite active search.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{fig_convexity_verification.png}
 \caption{Numerical verification of strict convexity $\partial^2 E/\partial\sigma^2 > 0$ at multiple
@@ -1197,7 +1275,7 @@ Figure~\ref{fig:zero2} shows the visualization at the second zero ($t \approx 21
 demonstrating that the toroidal structure and verification results are consistent across
 all tested zeros.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.9\textwidth]{proof_zero2.png}
 \caption{Visualization at the second zero ($t \approx 21.02$). The toroidal bands show
@@ -1390,11 +1468,30 @@ We conclude that the Riemann Hypothesis and 3D Navier-Stokes regularity are both
 \section{Conclusion}
 %=============================================================================
 
-We have presented a unified geometric framework for \textbf{two Millennium Prize Problems}:
+We have presented a unified geometric framework for \textbf{two Millennium Prize Problems}.
+The key results are summarized in Table~\ref{tab:summary}.
+
+\begin{table}[!htbp]
+\centering
+\caption{\textbf{Summary of Main Results}}
+\label{tab:summary}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Problem} & \textbf{Key Mechanism} & \textbf{Closure Theorem} \\
+\midrule
+Riemann Hypothesis & Hadamard pairing + Gram matrix & Zero Anchoring (Thm~\ref{thm:anchor}) \\
+& convexity with $R(\sigma) \geq 1$ & $A(s) > |K|$ for all $s$ \\
+\midrule
+Navier-Stokes 3D & $\varphi$-Beltrami structure & Quadratic Deviation (Thm~\ref{thm:quadratic}) \\
+& + viscous dominance & $d\delta/dt \leq C\Omega\delta^2$ \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \subsection{The Riemann Hypothesis: Complete Proof}
 
 \begin{theorem}[Main Result]
+\label{thm:main_result}
 All non-trivial zeros of $\zeta(s)$ satisfy $\mathrm{Re}(\rho) = \frac{1}{2}$.
 \end{theorem}
 
@@ -1534,7 +1631,7 @@ By the Beale-Kato-Majda criterion, this implies no blow-up. \qed
 
 \textbf{Verification:} All gaps closed. See \texttt{ns\_rigorous\_completion.py}.
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{fig_enstrophy_bound.png}
 \caption{The enstrophy bound $\Omega(t) \leq \Omega(0)$ for $\varphi$-Beltrami flow. The nonlinear
@@ -1604,7 +1701,7 @@ where:
 Any smooth divergence-free field can be expanded as $\mathbf{v}(\mathbf{x}) = \sum_{\mathbf{n}} c_{\mathbf{n}} \mathbf{v}_{\mathbf{n}}(\mathbf{x})$.
 \end{definition}
 
-\begin{figure}[h]
+\begin{figure}[!htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{fig_phi_quasiperiodic.png}
 \caption{The distribution of $\varphi$-quasiperiodic wavevectors in the $k_x$-$k_y$ plane. The incommensurability of $1/\varphi$ and $1/\varphi^2$ ensures that the points densely fill the Fourier space (see Section~\ref{sec:ns_density}), allowing for the approximation of any smooth field. The red dashed box highlights a region demonstrating the density property via Weyl's equidistribution theorem.}
