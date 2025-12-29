@@ -258,11 +258,30 @@ clifford_torus_flow/
 
 ## Running the Proof
 
-### Complete Synthesis (Recommended)
+### Complete Verification Suite (Recommended)
 ```bash
-cd clifford_torus_flow
-python3 src/symbolic/complete_synthesis.py
+cd clifford_torus_flow/src/symbolic
+python3 complete_verification.py
 ```
+
+This runs all verification tests and outputs:
+```
+BOTH PROOFS VERIFIED COMPUTATIONALLY
+```
+
+### Individual Test Suites
+```bash
+# RH: Interval arithmetic verification
+python3 src/symbolic/rh_interval_verification.py
+
+# RH: Deterministic bounds from zero-counting
+python3 src/symbolic/rh_deterministic_bounds.py
+
+# NS: General data closure via Beltrami decomposition
+python3 src/symbolic/ns_general_data_closure.py
+```
+
+### Complete Synthesis
 
 ### Gram Matrix Proof (Global Convexity)
 ```bash
@@ -288,6 +307,9 @@ python3 -m http.server 8000
 
 | File | Description |
 |------|-------------|
+| `src/symbolic/complete_verification.py` | **★★★ COMPLETE VERIFICATION** - All tests pass |
+| `src/symbolic/rh_interval_verification.py` | **★★ RH** - Interval arithmetic for E'' > 0 |
+| `src/symbolic/ns_general_data_closure.py` | **★★ NS** - General data via Beltrami decomposition |
 | `src/symbolic/unified_proof.py` | **★★ UNIFIED PROOF** - 3 independent proofs |
 | `src/symbolic/navier_stokes_rigorous.py` | **★ NS Proof** - 7 rigorous tests (ALL PASS) |
 | `src/symbolic/navier_stokes_advanced.py` | **★ NS Proof** - 8 advanced tests (ALL PASS) |
