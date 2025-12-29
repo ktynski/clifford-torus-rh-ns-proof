@@ -22,14 +22,15 @@ try:
 except ImportError:
     AUDIT_AVAILABLE = False
     print("WARNING: circularity_audit not yet implemented")
-
-
-class DependencyCategory:
-    """Categories for dependency audit"""
-    A = "PURE_ANALYSIS"       # No zero knowledge needed
-    B = "UNCONDITIONAL_ZC"    # Uses Riemann-von Mangoldt (no RH)
-    C = "COMPUTED_ZEROS"      # Uses computed zeros + remainder
-    D = "ASSUMES_RH"          # Circular - assumes zeros on line
+    
+    # Fallback for when module not available
+    from enum import Enum
+    class DependencyCategory(Enum):
+        """Categories for dependency audit"""
+        A = "PURE_ANALYSIS"       # No zero knowledge needed
+        B = "UNCONDITIONAL_ZC"    # Uses Riemann-von Mangoldt (no RH)
+        C = "COMPUTED_ZEROS"      # Uses computed zeros + remainder
+        D = "ASSUMES_RH"          # Circular - assumes zeros on line
 
 
 class TestPhase4_AnchoringTermAudit(unittest.TestCase):
